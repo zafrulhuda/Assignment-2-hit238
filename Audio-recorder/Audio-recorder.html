@@ -1,0 +1,116 @@
+<html>
+  <head>
+	<title> Share your obstracle
+	</title>
+
+
+
+     <link rel = " stylesheet" type= "text/css" href ="css/style.css" >
+
+
+  </head>
+  <body>
+      <style>
+      .recording {
+    background: red;
+  }
+
+
+
+      </style>
+
+      <h1> Let us know your problem in details!</h1>
+
+      <button id="recordBtn">Start</button>
+  <div id="audioContainer"></div>
+
+      <script>
+      function bindButtons(stream) {
+    console.log('setup');
+    var mediaRecorder = new MediaRecorder(stream);
+
+    var recordBtn = document.getElementById('recordBtn');
+    var audioContainer = document.getElementById('audioContainer');
+    var recording = false;
+    var chunks = [];
+
+
+    // Code::Listen for data available event and add to chunks
+    mediaRecorder.addEventListener('dataavailable', function(evt){
+      console.log('got data',evt);
+     chunks.push(evt.data);
+    });
+
+    // Code::Listen for stop event
+    mediaRecorder.addEventListener('stop', function(evt){
+
+    // Create a blob from the chunks and reset chunks to an empty array
+    var audioData = new Blob(chunks,{type:'audio/ogg; codecs=opus'})
+    chunks=[];
+    // Create a audio URL from the blob data
+    var audioUrl = window.URL.createObjectURL(audioData);
+    // Create a new audio element, set the audio URL and append to the audioContainer
+      var audioElement = document.createElement('audio');
+      audioElement.src = audioUrl;
+      audioElement.controls = true;
+      var audioContainer = document.querySelector('#audioContainer');
+      audioContainer.appendChild(audioElement);
+    })
+
+    recordBtn.addEventListener('click', function(evt) {
+      evt.preventDefault();
+      console.log('click');
+      if(recording) {
+        recordBtn.classList.remove('recording');
+        recordBtn.innerHTML = 'Start;'
+
+        // Code::Stop recording media
+  mediaRecorder.stop();
+      } else {
+        recordBtn.classList.add('recording');
+        recordBtn.innerHTML = 'Stop';
+        // Code:: Start recording media
+  mediaRecorder.start(500);
+      }
+      recording = !recording;
+
+
+    });
+  }
+
+  function enableAudio() {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      // Code:: Get audio stream and call bindButtons with stream
+
+      navigator.mediaDevices.getUserMedia({audio: true})
+      .then(bindButtons)
+    } else {
+       console.log('getUserMedia not supported on your browser!');
+    }
+  }
+
+  enableAudio();
+  //
+
+
+
+
+
+
+
+      </script>
+
+
+
+
+
+
+      </body>
+
+
+
+
+
+
+
+</html>
