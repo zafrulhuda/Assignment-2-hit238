@@ -153,20 +153,37 @@ img {
   box-sizing: border-box;
 }
 
-.mainData {
+.primeData {
   display: flex;
+    background-image: url(Report/img/img1.jpg);
+    background-position:center;
+    background-size: cover;
+    font-family: sans-serif;
 }
 
-.inputRow {
+.Input {s
   width: 100%;
 }
 
-.inputRow label {
+.Input label {
   display: inline-block;
   width: 25%;
 }
 
-.inputRow input {
+.Input input {
   width: 70%;
+}
+
+#containerprimeData
+{
+    margin:0;
+    padding:0;
+
+}
+.body{
+    background-image: url(Report/img/img1.jpg);
+    background-position:center;
+    background-size: cover;
+    font-family: sans-serif;
 }
 
