@@ -1,0 +1,132 @@
+<html>
+  <head>
+	<title> Query
+	</title>
+
+
+     <link rel = " stylesheet" type= "text/css" href ="css/style.css" >
+     <link rel="manifest" href="/manifest.json">
+
+  </head>
+
+<body>
+	<div class = "container">
+
+	  <div class = "nav" >
+
+		<div class = "left-side">
+            
+        </div>
+
+      </div>
+        
+ <div class="primeData">
+  <div class="Form">
+    <div class="Input">
+      <label for="nameInput">Name</label>
+      <input type="text" name="name" id="nameInput" />
+    </div>
+    <div class="Input">
+      <label for="problemInput">Problem</label>
+      <input type="text" name="problem" id="problemInput" />
+      
+    </div>
+     
+    </div>
+    <button id="saveBtn">Add </button>
+    <button id="loadBtn">Preview</button>
+  </div>
+  <table class="outputTable">
+  </table>
+</div>
+    
+        
+    
+    <script src="/js/app.js"></script>
+</body>
+    <script>
+        function saveDataClicked(evt) {
+  evt.preventDefault();
+  var name =document.querySelector('#nameInput').value
+  var problem=document.querySelector('#problemInput').value
+  console.log(name, problem)
+  sessionStorage.setItem(name,problem);
+
+  // Write code here
+}
+
+/**
+* Load data from storage and show in the table
+* @param {Event} evt Click event
+* @return {undefined} No return value
+**/
+function loadDataClicked(evt) {
+  evt.preventDefault();
+  document
+    .querySelector('.outputTable')
+    .innerHTML = '';
+  
+  
+for(var i = 0; i < sessionStorage.length; i++) {
+    var name = sessionStorage.key(i);
+    var problem = sessionStorage.getItem(name);
+  
+  
+  console.log(`${name}:${problem}`);
+  showRow(name, problem);
+    
+};
+    
+
+  
+  // Write code here
+}
+
+function deleteClicked(evt) {
+  var name = evt.target.dataset.name;
+
+  // Write code here
+}
+
+/**
+* Add a new row to the output table
+* @param {string} key The key value to show
+* @param {string} value The value to show
+* @return {Element} The table row object
+**/
+function showRow(name, problem) {
+  var nameCell = document.createElement('td');
+  nameCell.innerHTML = name;
+  var problemCell = document.createElement('td');
+  problemCell.innerHTML = problem;
+ 
+  var deleteRow = document.createElement('td');
+  var deleteButton = document.createElement('button');
+  deleteButton.class = 'delBtn';
+  deleteButton.innerHTML = 'delete';
+  deleteButton.dataset.name = name;
+  deleteButton.addEventListener('click', deleteClicked);
+  deleteRow.appendChild(deleteButton);
+  var row = document.createElement('tr');
+  row.appendChild(nameCell);
+  row.appendChild(problemCell);
+  
+  
+  row.appendChild(deleteRow);
+
+  document
+    .querySelector('.outputTable')
+    .appendChild(row);
+  return row;
+}
+
+document
+  .getElementById('saveBtn')
+  .addEventListener('click', saveDataClicked);
+
+document
+  .getElementById('loadBtn')
+  .addEventListener('click', loadDataClicked);
+    </script>
+
+</html>
