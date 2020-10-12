@@ -153,7 +153,8 @@ img {
   box-sizing: border-box;
 }
 
-.primeData {
+#primeData 
+{
   display: flex;
     background-image: url(Report/img/img1.jpg);
     background-position:center;
@@ -172,18 +173,5 @@ img {
 
 .Input input {
   width: 70%;
-}
-
-#containerprimeData
-{
-    margin:0;
-    padding:0;
-
-}
-.body{
-    background-image: url(Report/img/img1.jpg);
-    background-position:center;
-    background-size: cover;
-    font-family: sans-serif;
 }
 
