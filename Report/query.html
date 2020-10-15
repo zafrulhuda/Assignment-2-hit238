@@ -53,14 +53,10 @@
   console.log(name, problem)
   sessionStorage.setItem(name,problem);
 
-  // Write code here
+  
 }
 
-/**
-* Load data from storage and show in the table
-* @param {Event} evt Click event
-* @return {undefined} No return value
-**/
+
 function loadDataClicked(evt) {
   evt.preventDefault();
   document
@@ -80,7 +76,7 @@ for(var i = 0; i < sessionStorage.length; i++) {
     
 
   
-  // Write code here
+  
 }
 
 function deleteClicked(evt) {
@@ -88,15 +84,10 @@ function deleteClicked(evt) {
     sessionStorage.removeItem(name);
     console.log(name);
 
-  // Write code here
+  
 }
 
-/**
-* Add a new row to the output table
-* @param {string} key The key value to show
-* @param {string} value The value to show
-* @return {Element} The table row object
-**/
+
 function showRow(name, problem) {
   var nameCell = document.createElement('td');
   nameCell.innerHTML = name;
